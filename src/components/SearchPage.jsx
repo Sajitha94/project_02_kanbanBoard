@@ -17,6 +17,8 @@ import { useState } from "react";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
+import { useKanban } from "./LocalStorageDB";
+import AddNew from "./AddNew";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -62,6 +64,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function SearchPage() {
   const [status, setStatus] = useState("");
   const [priorities, SetPriorities] = useState("");
+  const { open, handleClose, handleClickOpen } = useKanban();
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
@@ -123,6 +126,7 @@ function SearchPage() {
               textTransform: "none",
               borderRadius: "10px",
             }}
+            onClick={handleClickOpen}
           >
             <AddIcon sx={{ display: { xs: "none", lg: "flex" } }} />
             Add New
@@ -180,6 +184,7 @@ function SearchPage() {
           </Select>
         </FormControl>
       </Box>
+      <AddNew />
     </Box>
   );
 }

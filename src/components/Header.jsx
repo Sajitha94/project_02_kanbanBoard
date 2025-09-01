@@ -9,7 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 function Header() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: "1100" }}>
       <AppBar position="static" sx={{ backgroundColor: "#eaf3f3" }}>
         <Toolbar>
           <Typography
