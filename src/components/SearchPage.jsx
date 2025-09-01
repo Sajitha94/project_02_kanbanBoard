@@ -121,6 +121,7 @@ function SearchPage() {
               backgroundColor: "#00695c",
               fontSize: { sm: "14px", xs: "13px" },
               textTransform: "none",
+              borderRadius: "10px",
             }}
           >
             <AddIcon sx={{ display: { xs: "none", lg: "flex" } }} />
