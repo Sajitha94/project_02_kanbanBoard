@@ -14,7 +14,9 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useState } from "react";
-
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -74,28 +76,53 @@ function SearchPage() {
         justifyContent: "space-around",
         marginTop: "30px",
         alignItems: "center",
-        flexDirection: { xs: "column", sm: "row" },
+        flexDirection: { xs: "column", md: "row" },
         marginLeft: "10px",
         marginRight: "10px",
+        gap: "3px",
       }}
     >
-      <Search
+      <Box
         sx={{
-          width: { sm: "50vw !important" },
-          height: { sm: "9vh" },
-          border: "2px solid #cddc39",
+          display: "flex",
+          gap: "5px",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-        />
-      </Search>
-
-      <Box>
+        <Search
+          sx={{
+            width: { sm: "50vw !important", xs: "70vw" },
+            height: { sm: "9vh" },
+            border: "2px solid #cddc39",
+          }}
+        >
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+          />
+        </Search>
+        <Stack spacing={2} direction="row">
+          <Button
+            variant="contained"
+            sx={{
+              height: { xs: "7vh  !important", sm: "9vh !important" },
+              backgroundColor: "#9e9d24",
+              fontSize: { sm: "14px", xs: "10px" },
+              textTransform: "none",
+            }}
+          >
+            <AddIcon sx={{ display: { xs: "none", lg: "flex" } }} />
+            Add New
+          </Button>
+        </Stack>
+      </Box>
+      <Box
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
         <FormControl sx={{ m: 1, minWidth: 120 }}>
           <Select
             value={status}
