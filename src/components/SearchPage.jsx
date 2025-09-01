@@ -95,6 +95,8 @@ function SearchPage() {
             width: { sm: "50vw !important", xs: "60vw !important" },
             height: { sm: "9vh" },
             border: "2px solid #cddc39",
+            color: "#746803",
+            display: "flex",
           }}
         >
           <SearchIconWrapper>
@@ -137,6 +139,7 @@ function SearchPage() {
               height: { xs: "7vh !important", sm: "9vh !important" },
               border: "2px solid #cddc39",
               "& fieldset": { border: "none" },
+              color: "#746803",
             }}
           >
             <MenuItem value="">
@@ -156,6 +159,7 @@ function SearchPage() {
             inputProps={{ "aria-label": "Without label" }}
             sx={{
               height: { xs: "7vh  !important", sm: "9vh !important" },
+              color: "#746803",
               border: "2px solid #cddc39",
               "& fieldset": { border: "none" },
             }}
