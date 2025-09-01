@@ -92,7 +92,7 @@ function SearchPage() {
       >
         <Search
           sx={{
-            width: { sm: "50vw !important", xs: "70vw" },
+            width: { sm: "50vw !important", xs: "60vw !important" },
             height: { sm: "9vh" },
             border: "2px solid #cddc39",
           }}
@@ -109,7 +109,11 @@ function SearchPage() {
           <Button
             variant="contained"
             sx={{
-              height: { xs: "7vh  !important", sm: "9vh !important" },
+              height: {
+                xs: "40px  !important",
+                md: "45px !important",
+                lg: "50px !important",
+              },
               backgroundColor: "#9e9d24",
               fontSize: { sm: "14px", xs: "10px" },
               textTransform: "none",
@@ -136,7 +140,7 @@ function SearchPage() {
             }}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>All Statuses</em>
             </MenuItem>
             <MenuItem value={"todo"}>To Do</MenuItem>
             <MenuItem value={"process"}>In Progress</MenuItem>
@@ -157,7 +161,7 @@ function SearchPage() {
             }}
           >
             <MenuItem value="">
-              <em>None</em>
+              <em>All priorities</em>
             </MenuItem>
             <MenuItem value={"low"}>Low</MenuItem>
             <MenuItem value={"medium"}>Medium</MenuItem>
