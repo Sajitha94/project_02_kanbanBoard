@@ -9,13 +9,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ViewKanbanIcon from "@mui/icons-material/ViewKanban";
 function Header() {
   return (
-    <Box sx={{ flexGrow: 1, backgroundColor: "#e6ee9c" }}>
-      <AppBar position="static" sx={{ backgroundColor: "#f9fbe7" }}>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "#eae5f1" }}>
         <Toolbar>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, color: "#827717", fontWeight: "bold" }}
+            sx={{ flexGrow: 1, color: "#311b92", fontWeight: "bold" }}
           >
             <ViewKanbanIcon className="mx-2" />
             Kanban Board

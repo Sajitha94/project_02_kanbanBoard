@@ -94,9 +94,11 @@ function SearchPage() {
           sx={{
             width: { sm: "50vw !important", xs: "60vw !important" },
             height: { sm: "9vh" },
-            border: "2px solid #cddc39",
-            color: "#746803",
+            border: "2px solid #d1c4e9",
+            color: "#424242",
+            backgroundColor: "white",
             display: "flex",
+            borderRadius: "20px",
           }}
         >
           <SearchIconWrapper>
@@ -116,7 +118,7 @@ function SearchPage() {
                 md: "45px !important",
                 lg: "50px !important",
               },
-              backgroundColor: "#9e9d24",
+              backgroundColor: "#7e57c2",
               fontSize: { sm: "14px", xs: "10px" },
               textTransform: "none",
             }}
@@ -137,9 +139,11 @@ function SearchPage() {
             inputProps={{ "aria-label": "Without label" }}
             sx={{
               height: { xs: "7vh !important", sm: "9vh !important" },
-              border: "2px solid #cddc39",
+              border: "2px solid #d1c4e9",
               "& fieldset": { border: "none" },
-              color: "#746803",
+              color: "#424242",
+              backgroundColor: "white",
+              borderRadius: "10px",
             }}
           >
             <MenuItem value="">
@@ -159,9 +163,11 @@ function SearchPage() {
             inputProps={{ "aria-label": "Without label" }}
             sx={{
               height: { xs: "7vh  !important", sm: "9vh !important" },
-              color: "#746803",
-              border: "2px solid #cddc39",
+              color: "#424242",
+              backgroundColor: "white",
+              border: "2px solid #d1c4e9",
               "& fieldset": { border: "none" },
+              borderRadius: "10px",
             }}
           >
             <MenuItem value="">
