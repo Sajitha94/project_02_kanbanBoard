@@ -30,7 +30,7 @@ function ToDoCard() {
           display: "flex",
           flexDirection: "column",
           gap: "5px",
-          backgroundColor: "#f2f1f4",
+          backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
         }}
@@ -38,7 +38,7 @@ function ToDoCard() {
         <Typography
           sx={{
             paddingBottom: "10px",
-            color: "#512da8",
+            color: "#00695c",
             fontWeight: "bold",
             fontSize: "20px",
           }}
@@ -49,7 +49,7 @@ function ToDoCard() {
           sx={{
             width: 275,
             height: "350px",
-            borderLeft: "5px solid #9575cd",
+            borderLeft: "5px solid #00796b",
             borderRadius: "5px",
           }}
         >
@@ -140,7 +140,7 @@ function ToDoCard() {
           display: "flex",
           flexDirection: "column",
           gap: "5px",
-          backgroundColor: "#f2f1f4",
+          backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
         }}
@@ -148,7 +148,7 @@ function ToDoCard() {
         <Typography
           sx={{
             paddingBottom: "10px",
-            color: "#512da8",
+            color: "#00695c",
             fontWeight: "bold",
             fontSize: "20px",
           }}
@@ -159,7 +159,7 @@ function ToDoCard() {
           sx={{
             width: 275,
             height: "350px",
-            borderLeft: "5px solid #9575cd",
+            borderLeft: "5px solid #00796b",
             borderRadius: "5px",
           }}
         >
@@ -250,7 +250,7 @@ function ToDoCard() {
           display: "flex",
           flexDirection: "column",
           gap: "5px",
-          backgroundColor: "#f2f1f4",
+          backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
         }}
@@ -258,7 +258,7 @@ function ToDoCard() {
         <Typography
           sx={{
             paddingBottom: "10px",
-            color: "#512da8",
+            color: "#00695c",
             fontWeight: "bold",
             fontSize: "20px",
           }}
@@ -269,7 +269,7 @@ function ToDoCard() {
           sx={{
             width: 275,
             height: "350px",
-            borderLeft: "5px solid #9575cd",
+            borderLeft: "5px solid #00796b",
             borderRadius: "5px",
           }}
         >

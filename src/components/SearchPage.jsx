@@ -94,7 +94,7 @@ function SearchPage() {
           sx={{
             width: { sm: "50vw !important", xs: "60vw !important" },
             height: { sm: "9vh" },
-            border: "2px solid #d1c4e9",
+            border: "1px solid #4db6ac",
             color: "#424242",
             backgroundColor: "white",
             display: "flex",
@@ -118,7 +118,7 @@ function SearchPage() {
                 md: "45px !important",
                 lg: "50px !important",
               },
-              backgroundColor: "#7e57c2",
+              backgroundColor: "#00695c",
               fontSize: { sm: "14px", xs: "13px" },
               textTransform: "none",
             }}
@@ -139,7 +139,7 @@ function SearchPage() {
             inputProps={{ "aria-label": "Without label" }}
             sx={{
               height: { xs: "7vh !important", sm: "9vh !important" },
-              border: "2px solid #d1c4e9",
+              border: "1px solid #4db6ac",
               "& fieldset": { border: "none" },
               color: "#424242",
               backgroundColor: "white",
@@ -165,7 +165,7 @@ function SearchPage() {
               height: { xs: "7vh  !important", sm: "9vh !important" },
               color: "#424242",
               backgroundColor: "white",
-              border: "2px solid #d1c4e9",
+              border: "1px solid #4db6ac",
               "& fieldset": { border: "none" },
               borderRadius: "10px",
             }}
