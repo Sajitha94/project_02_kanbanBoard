@@ -119,7 +119,7 @@ function SearchPage() {
                 lg: "50px !important",
               },
               backgroundColor: "#7e57c2",
-              fontSize: { sm: "14px", xs: "10px" },
+              fontSize: { sm: "14px", xs: "13px" },
               textTransform: "none",
             }}
           >
