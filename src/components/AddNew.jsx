@@ -21,11 +21,10 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import { useState } from "react";
 
 const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
   width: "100%",
-  marginTop: "20px",
-  marginBottom: "20px",
   padding: "10px",
   border: "2px solid #ccc",
   borderRadius: "8px",
@@ -41,7 +40,9 @@ const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
 }));
 function AddNew() {
   const { open, handleClose, handleClickOpen } = useKanban();
-  const [dueDate, setDueDate] = React.useState(dayjs());
+  const [dueDate, setDueDate] = useState(dayjs());
+  const [selectStatus, setselectStatus] = useState("");
+  const [selectPriority, setSelectPriority] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -52,8 +53,11 @@ function AddNew() {
     handleClose();
   };
 
-  const handleStatusChange = (event) => {
-    setStatus(event.target.value);
+  const SelectStatusChange = (event) => {
+    setselectStatus(event.target.value);
+  };
+  const SelectPriorityChange = (event) => {
+    setSelectPriority(event.target.value);
   };
 
   const cancelClick = () => {
@@ -65,7 +69,11 @@ function AddNew() {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Create a new task</DialogTitle>
         <DialogContent>
-          <form onSubmit={handleSubmit} id="subscription-form">
+          <form
+            onSubmit={handleSubmit}
+            id="subscription-form"
+            className="flex flex-col justify-center  gap-4"
+          >
             <TextField
               autoFocus
               required
@@ -77,6 +85,9 @@ function AddNew() {
                 "& .MuiOutlinedInput-root": {
                   "&:hover fieldset": { border: "2px solid #80cbc4" },
                   "&.Mui-focused fieldset": { border: "2px solid #4db6ac" },
+                  "& fieldset": {
+                    border: "2px solid #ccc",
+                  },
                 },
                 "& .MuiInputLabel-root": {
                   color: "#ccc",
@@ -99,74 +110,107 @@ function AddNew() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                gap: "5px",
+                flexDirection: { xs: "column", sm: "row" },
               }}
             >
-              <Box>
-                <Typography>Status</Typography>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={status}
-                    onChange={handleStatusChange}
-                    displayEmpty
-                    inputProps={{ "aria-label": "Without label" }}
-                    sx={{
-                      height: { xs: "7vh !important", sm: "9vh !important" },
-                      border: "2px solid #ccc",
-                      "& fieldset": { border: "none" },
-                      color: "#424242",
-                      backgroundColor: "white",
-                      borderRadius: "10px",
-                      "&:hover": {
-                        border: "2px solid #80cbc4",
-                      },
-                      "&.Mui-focused": {
-                        border: "2px solid #4db6ac",
-                      },
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>All Statuses</em>
-                    </MenuItem>
-                    <MenuItem value={"todo"}>To Do</MenuItem>
-                    <MenuItem value={"process"}>In Progress</MenuItem>
-                    <MenuItem value={"done"}>Done</MenuItem>
-                  </Select>
-                </FormControl>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { sm: "row", xs: "column" },
+                  gap: "5px",
+                  width: "100%",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ fontSize: "14px", color: "#616161" }}>
+                    Status
+                  </Typography>
+                  <FormControl sx={{ m: 1, width: "100%", margin: 0 }}>
+                    <Select
+                      value={selectStatus}
+                      onChange={SelectStatusChange}
+                      displayEmpty
+                      inputProps={{ "aria-label": "Without label" }}
+                      sx={{
+                        border: "2px solid #ccc",
+                        "& fieldset": { border: "none" },
+                        color: "#424242",
+                        backgroundColor: "white",
+                        borderRadius: "10px",
+                        "&:hover": {
+                          border: "2px solid #80cbc4",
+                        },
+                        "&.Mui-focused": {
+                          border: "2px solid #4db6ac",
+                        },
+                      }}
+                    >
+                      <MenuItem value="">
+                        <em>All Statuses</em>
+                      </MenuItem>
+                      <MenuItem value={"todo"}>To Do</MenuItem>
+                      <MenuItem value={"process"}>In Progress</MenuItem>
+                      <MenuItem value={"done"}>Done</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography sx={{ fontSize: "14px", color: "#616161" }}>
+                    Priority
+                  </Typography>
+                  <FormControl sx={{ m: 1, width: "100%", margin: 0 }}>
+                    <Select
+                      value={selectPriority}
+                      onChange={SelectPriorityChange}
+                      displayEmpty
+                      inputProps={{ "aria-label": "Without label" }}
+                      sx={{
+                        border: "2px solid #ccc",
+                        "& fieldset": { border: "none" },
+                        color: "#424242",
+                        backgroundColor: "white",
+                        borderRadius: "10px",
+                        "&:hover": {
+                          border: "2px solid #80cbc4",
+                        },
+                        "&.Mui-focused": {
+                          border: "2px solid #4db6ac",
+                        },
+                      }}
+                    >
+                      <MenuItem value="">
+                        <em>All Statuses</em>
+                      </MenuItem>
+                      <MenuItem value={"low"}>Low</MenuItem>
+                      <MenuItem value={"medium"}>Medium</MenuItem>
+                      <MenuItem value={"high"}>Hign</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Box>
               </Box>
-              <Box>
-                <Typography>Priority</Typography>
-                <FormControl sx={{ m: 1, minWidth: 120 }}>
-                  <Select
-                    value={status}
-                    onChange={handleStatusChange}
-                    displayEmpty
-                    inputProps={{ "aria-label": "Without label" }}
-                    sx={{
-                      height: { xs: "7vh !important", sm: "9vh !important" },
-                      border: "2px solid #ccc",
-                      "& fieldset": { border: "none" },
-                      color: "#424242",
-                      backgroundColor: "white",
-                      borderRadius: "10px",
-                      "&:hover": {
-                        border: "2px solid #80cbc4",
-                      },
-                      "&.Mui-focused": {
-                        border: "2px solid #4db6ac",
-                      },
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>All Statuses</em>
-                    </MenuItem>
-                    <MenuItem value={"low"}>Low</MenuItem>
-                    <MenuItem value={"medium"}>Medium</MenuItem>
-                    <MenuItem value={"high"}>Hign</MenuItem>
-                  </Select>
-                </FormControl>
-              </Box>
-              <Box>
-                <Typography>Due date</Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Typography sx={{ fontSize: "14px", color: "#616161" }}>
+                  Due date
+                </Typography>
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker
                     value={dueDate}
@@ -198,18 +242,21 @@ function AddNew() {
               </Box>
             </Box>
             <Box>
-              <Typography>Tags (comma separated)</Typography>
+              <Typography sx={{ fontSize: "14px", color: "#616161" }}>
+                Tags (comma separated)
+              </Typography>
               <TextField
-                autoFocus
-                required
                 fullWidth
-                name="title"
-                placeholder="Title"
+                name="Tags"
+                placeholder="Tags"
                 variant="outlined"
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "&:hover fieldset": { border: "2px solid #80cbc4" },
                     "&.Mui-focused fieldset": { border: "2px solid #4db6ac" },
+                    "& fieldset": {
+                      border: "2px solid #ccc",
+                    },
                   },
                   "& .MuiInputLabel-root": {
                     color: "#ccc",
@@ -241,11 +288,11 @@ function AddNew() {
             type="submit"
             form="add-form"
             sx={{
-              color: "red",
-              color: "#9575cd",
-              border: "1px solid #d1c4e9",
+              color: "white",
+              borderRadius: "5px",
               textTransform: "none",
               gap: 0.5,
+              backgroundColor: "#00695c",
             }}
           >
             {/* {noteToEdit ? (
