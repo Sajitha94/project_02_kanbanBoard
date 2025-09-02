@@ -82,7 +82,7 @@ function AddNew() {
           <form
             onSubmit={handleSubmit}
             id="subscription-form"
-            className="flex flex-col justify-center  gap-4"
+            className="flex flex-col justify-center  gap-5"
           >
             <TextField
               autoFocus
@@ -120,7 +120,7 @@ function AddNew() {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "5px",
+                gap: "10px",
                 flexDirection: { xs: "column", sm: "row" },
               }}
             >
@@ -128,7 +128,7 @@ function AddNew() {
                 sx={{
                   display: "flex",
                   flexDirection: { sm: "row", xs: "column" },
-                  gap: "5px",
+                  gap: "12px",
                   width: "100%",
                 }}
               >
