@@ -22,6 +22,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import { useState } from "react";
+import { useTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
   width: "100%",
@@ -38,12 +40,14 @@ const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
     outline: "none",
   },
 }));
+
 function AddNew() {
   const { open, handleClose, handleClickOpen } = useKanban();
   const [dueDate, setDueDate] = useState(dayjs());
   const [selectStatus, setselectStatus] = useState("");
   const [selectPriority, setSelectPriority] = useState("");
-
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -66,7 +70,13 @@ function AddNew() {
   };
   return (
     <>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        fullScreen={fullScreen}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>Create a new task</DialogTitle>
         <DialogContent>
           <form
@@ -206,6 +216,7 @@ function AddNew() {
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
+                  width: "100%",
                 }}
               >
                 <Typography sx={{ fontSize: "14px", color: "#616161" }}>
