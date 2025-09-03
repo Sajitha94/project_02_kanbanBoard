@@ -24,6 +24,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useEffect } from "react";
 
 const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
   width: "100%",
@@ -64,13 +65,25 @@ function AddNew() {
     date: "",
   });
   const theme = useTheme();
+
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const boardToEdit = boards.find((boards) => boards.id === editBoardId);
+  useEffect(() => {
+    if (boardToEdit) {
+      setselectStatus(boardToEdit.status || "");
+      setSelectPriority(boardToEdit.priority || "");
+      setDueDate(
+        boardToEdit.date ? dayjs(boardToEdit.date, "DD/MM/YYYY") : dayjs()
+      );
+    } else {
+      setselectStatus("");
+      setSelectPriority("");
+      setDueDate(dayjs());
+    }
+  }, [boardToEdit]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("saji");
-    console.log(boards, viewOnly, "0");
 
     if (viewOnly) return;
     const formData = new FormData(event.currentTarget);
@@ -94,6 +107,7 @@ function AddNew() {
       priority: "",
       date: "",
     };
+
     if (!title) {
       newErrors.title = "Title is required";
       hasError = true;
@@ -124,10 +138,12 @@ function AddNew() {
 
     if (boardToEdit) {
       const UpdateBoard = boards.map((item) =>
-        item.id === editNoteId
+        item.id === editBoardId
           ? { ...item, title, description, tags, date, status, priority }
           : item
       );
+      handleClose();
+
       setBoards(UpdateBoard);
     } else {
       const id = Math.floor(Math.random() * 3) + Date.now();
@@ -140,10 +156,8 @@ function AddNew() {
         date,
         tags,
       };
-      console.log(newBoard, "newboard");
 
       setBoards([...boards, newBoard]);
-      console.log(boards, "0");
 
       handleClose();
     }
@@ -196,6 +210,7 @@ function AddNew() {
               name="title"
               placeholder="Title"
               variant="outlined"
+              defaultValue={boardToEdit ? boardToEdit.title : ""}
               InputProps={{ readOnly: viewOnly }}
               error={!!errors.title}
               helperText={errors.title}
@@ -219,6 +234,7 @@ function AddNew() {
             <StyledTextarea
               name="description"
               readOnly={viewOnly}
+              defaultValue={boardToEdit ? boardToEdit.description : ""}
               maxRows={10}
               minRows={4}
               aria-label="description"
@@ -405,6 +421,7 @@ function AddNew() {
                 name="tags"
                 placeholder="Tags"
                 variant="outlined"
+                defaultValue={boardToEdit ? boardToEdit.tags : ""}
                 InputProps={{ readOnly: viewOnly }}
                 error={!!errors.tags}
                 helperText={errors.tags}

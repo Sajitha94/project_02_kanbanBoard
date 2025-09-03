@@ -3,7 +3,6 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 import Stack from "@mui/material/Stack";
@@ -23,7 +22,15 @@ function ToDoCard() {
     setViewOnly,
     setEditBoardId,
   } = useKanban();
-  console.log(boards, "board");
+
+  const ButtonOnclick = (btn, id) => {
+    if (btn === "edit") {
+      handleClickOpen(id);
+    } else if (btn === "delete") {
+      const deleteData = boards.filter((item) => item.id !== id);
+      setBoards(deleteData);
+    }
+  };
 
   return (
     <Box
@@ -60,7 +67,7 @@ function ToDoCard() {
           To Do
         </Typography>
         {boards.map((card, idx) => {
-          if ((card.status = "To Do")) {
+          if (card.status === "todo") {
             return (
               <Card
                 sx={{
@@ -143,8 +150,12 @@ function ToDoCard() {
                         gap: "10px",
                       }}
                     >
-                      <EditIcon />
-                      <DeleteIcon />
+                      <EditIcon
+                        onClick={() => ButtonOnclick("edit", card.id)}
+                      />
+                      <DeleteIcon
+                        onClick={() => ButtonOnclick("delte", card.id)}
+                      />
                     </Box>
                   </Box>
                 </CardActions>

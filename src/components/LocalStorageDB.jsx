@@ -14,8 +14,8 @@ export function LocalStorageDB({ children }) {
       title: "Welcome to Notes",
       description:
         "This is an example note. Use the + button to create notes, add tags (comma separated), and try pinning/archiving/trashing.",
-      status: "To Do",
-      priority: "Low",
+      status: "todo",
+      priority: "low",
       date: "01/02/2012",
       tags: ["welcome", "example"],
     },
@@ -30,6 +30,10 @@ export function LocalStorageDB({ children }) {
       setBoards(storeBoard);
     }
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("Boards", JSON.stringify(boards));
+  }, [boards]);
 
   const handleClose = () => {
     setEditBoardId(null);
@@ -51,6 +55,8 @@ export function LocalStorageDB({ children }) {
         setBoards,
         viewOnly,
         setViewOnly,
+
+        editBoardId,
         setEditBoardId,
       }}
     >
