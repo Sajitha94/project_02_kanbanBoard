@@ -23,6 +23,10 @@ function ToDoCard() {
     setViewOnly,
     setEditBoardId,
     searchTerm,
+    status,
+    setStatus,
+    priorities,
+    SetPriorities,
   } = useKanban();
 
   const ButtonOnclick = (btn, id) => {
@@ -41,16 +45,25 @@ function ToDoCard() {
     handleClickOpen(id, true);
   };
 
-  const filteredBoards = searchTerm.trim()
-    ? boards.filter(
-        (item) =>
-          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          item.tags.some((tag) =>
-            tag.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-      )
-    : boards;
+  const filteredBoards = boards.filter((item) => {
+    // 🔍 Search filter
+    const matchesSearch =
+      searchTerm.trim() === "" ||
+      item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.tags.some((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+
+    // 📌 Status filter
+    const matchesStatus = status === "" || item.status === status;
+
+    // ⚡ Priority filter
+    const matchesPriority = priorities === "" || item.priority === priorities;
+
+    return matchesSearch && matchesStatus && matchesPriority;
+  });
+
   return (
     <Box
       sx={{

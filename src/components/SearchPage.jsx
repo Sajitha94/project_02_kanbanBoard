@@ -55,8 +55,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 function SearchPage() {
-  const [status, setStatus] = useState("");
-  const [priorities, SetPriorities] = useState("");
   const {
     open,
     handleClose,
@@ -65,13 +63,17 @@ function SearchPage() {
     setViewOnly,
     searchTerm,
     setSearchTerm,
+    status,
+    setStatus,
+    priorities,
+    setPriorities,
   } = useKanban();
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
   const handlePrioritiesChange = (event) => {
-    SetPriorities(event.target.value);
+    setPriorities(event.target.value);
   };
   const searchClick = (btn) => {
     setSearchTerm("");

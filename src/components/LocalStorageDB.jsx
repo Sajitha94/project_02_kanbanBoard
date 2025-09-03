@@ -9,6 +9,17 @@ export function LocalStorageDB({ children }) {
   const [viewOnly, setViewOnly] = useState(false);
   const [editBoardId, setEditBoardId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [status, setStatus] = useState("");
+const [priorities, setPriorities] = useState("");
+
+const handleStatusChange = (event) => {
+  setStatus(event.target.value);
+};
+
+const handlePrioritiesChange = (event) => {
+  setPriorities(event.target.value);
+};
+
   const defaultBoard = [
     {
       id: 1,
@@ -60,6 +71,8 @@ export function LocalStorageDB({ children }) {
         setSearchTerm,
         editBoardId,
         setEditBoardId,
+        status, setStatus,
+        priorities, setPriorities
       }}
     >
       {children}
