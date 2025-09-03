@@ -57,7 +57,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function SearchPage() {
   const [status, setStatus] = useState("");
   const [priorities, SetPriorities] = useState("");
-  const { open, handleClose, handleClickOpen } = useKanban();
+  const { open, handleClose, handleClickOpen, viewOnly,
+    setViewOnly, } = useKanban();
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
@@ -81,7 +82,7 @@ function SearchPage() {
       <Box
         sx={{
           display: "flex",
-          gap: "5px",
+          gap: "10px",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -177,7 +178,7 @@ function SearchPage() {
           </Select>
         </FormControl>
       </Box>
-      <AddNew />
+      <AddNew viewOnly={viewOnly} />
     </Box>
   );
 }

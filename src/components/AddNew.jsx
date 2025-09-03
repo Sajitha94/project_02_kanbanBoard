@@ -42,21 +42,112 @@ const StyledTextarea = styled(TextareaAutosize)(({ theme }) => ({
 }));
 
 function AddNew() {
-  const { open, handleClose, handleClickOpen } = useKanban();
+  const {
+    open,
+    handleClose,
+    handleClickOpen,
+    boards,
+    setBoards,
+    editBoardId,
+    viewOnly,
+    setViewOnly,
+  } = useKanban();
   const [dueDate, setDueDate] = useState(dayjs());
   const [selectStatus, setselectStatus] = useState("");
   const [selectPriority, setSelectPriority] = useState("");
+  const [errors, setErrors] = useState({
+    title: "",
+    description: "",
+    tags: "",
+    status: "",
+    priority: "",
+    date: "",
+  });
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const boardToEdit = boards.find((boards) => boards.id === editBoardId);
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    // const formJson = Object.fromEntries((formData as any).entries());
-    const email = formJson.email;
-    console.log(email);
-    handleClose();
-  };
+    console.log("saji");
+    console.log(boards, viewOnly, "0");
 
+    if (viewOnly) return;
+    const formData = new FormData(event.currentTarget);
+    const title = formData.get("title");
+    const description = formData.get("description");
+    const tagInput = formData.get("tags") || "";
+    const status = selectStatus;
+    const priority = selectPriority;
+    const date = dueDate ? dayjs(dueDate).format("DD/MM/YYYY") : "";
+    const tags = tagInput
+      .split(",")
+      .map((item) => item.trim())
+      .filter((item) => item !== "");
+
+    let hasError = false;
+    const newErrors = {
+      title: "",
+      description: "",
+      tags: "",
+      status: "",
+      priority: "",
+      date: "",
+    };
+    if (!title) {
+      newErrors.title = "Title is required";
+      hasError = true;
+    }
+    if (!description) {
+      newErrors.description = "Description is required";
+      hasError = true;
+    }
+
+    if (tags.length === 0) {
+      newErrors.tags = "At least one tag is required";
+      hasError = true;
+    }
+    if (!status) {
+      newErrors.status = "Status is required";
+      hasError = true;
+    }
+    if (!priority) {
+      newErrors.priority = "Priority is required";
+      hasError = true;
+    }
+    if (!date) {
+      newErrors.date = "Due date is required";
+      hasError = true;
+    }
+    setErrors(newErrors);
+    if (hasError) return;
+
+    if (boardToEdit) {
+      const UpdateBoard = boards.map((item) =>
+        item.id === editNoteId
+          ? { ...item, title, description, tags, date, status, priority }
+          : item
+      );
+      setBoards(UpdateBoard);
+    } else {
+      const id = Math.floor(Math.random() * 3) + Date.now();
+      const newBoard = {
+        id,
+        title,
+        description,
+        status,
+        priority,
+        date,
+        tags,
+      };
+      console.log(newBoard, "newboard");
+
+      setBoards([...boards, newBoard]);
+      console.log(boards, "0");
+
+      handleClose();
+    }
+  };
   const SelectStatusChange = (event) => {
     setselectStatus(event.target.value);
   };
@@ -65,9 +156,17 @@ function AddNew() {
   };
 
   const cancelClick = () => {
-    // setErrors({ title: "", description: "", tags: "" });
+    setErrors({
+      title: "",
+      description: "",
+      tags: "",
+      status: "",
+      priority: "",
+      date: "",
+    });
     handleClose();
   };
+
   return (
     <>
       <Dialog
@@ -77,20 +176,29 @@ function AddNew() {
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle>Create a new task</DialogTitle>
+        <DialogTitle>
+          {" "}
+          {viewOnly
+            ? "View Note"
+            : editBoardId
+            ? "Edit Note"
+            : "Create a new task"}
+        </DialogTitle>
         <DialogContent>
           <form
             onSubmit={handleSubmit}
-            id="subscription-form"
+            id="add-form"
             className="flex flex-col justify-center  gap-5"
           >
             <TextField
               autoFocus
-              required
               fullWidth
               name="title"
               placeholder="Title"
               variant="outlined"
+              InputProps={{ readOnly: viewOnly }}
+              error={!!errors.title}
+              helperText={errors.title}
               sx={{
                 "& .MuiOutlinedInput-root": {
                   "&:hover fieldset": { border: "2px solid #80cbc4" },
@@ -110,11 +218,23 @@ function AddNew() {
 
             <StyledTextarea
               name="description"
+              readOnly={viewOnly}
               maxRows={10}
               minRows={4}
               aria-label="description"
               placeholder="Write your note here..."
             />
+            {errors.description && (
+              <span
+                style={{
+                  color: "#d32f2f",
+                  fontSize: "12px",
+                  paddingLeft: "15px",
+                }}
+              >
+                {errors.description}
+              </span>
+            )}
             <Box
               sx={{
                 display: "flex",
@@ -142,7 +262,10 @@ function AddNew() {
                   <Typography sx={{ fontSize: "14px", color: "#616161" }}>
                     Status
                   </Typography>
-                  <FormControl sx={{ m: 1, width: "100%", margin: 0 }}>
+                  <FormControl
+                    sx={{ m: 1, width: "100%", margin: 0 }}
+                    error={!!errors.status}
+                  >
                     <Select
                       value={selectStatus}
                       onChange={SelectStatusChange}
@@ -170,6 +293,11 @@ function AddNew() {
                       <MenuItem value={"done"}>Done</MenuItem>
                     </Select>
                   </FormControl>
+                  {errors.status && (
+                    <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                      {errors.status}
+                    </span>
+                  )}
                 </Box>
                 <Box
                   sx={{
@@ -181,7 +309,10 @@ function AddNew() {
                   <Typography sx={{ fontSize: "14px", color: "#616161" }}>
                     Priority
                   </Typography>
-                  <FormControl sx={{ m: 1, width: "100%", margin: 0 }}>
+                  <FormControl
+                    sx={{ m: 1, width: "100%", margin: 0 }}
+                    error={!!errors.priority}
+                  >
                     <Select
                       value={selectPriority}
                       onChange={SelectPriorityChange}
@@ -209,6 +340,11 @@ function AddNew() {
                       <MenuItem value={"high"}>Hign</MenuItem>
                     </Select>
                   </FormControl>
+                  {errors.priority && (
+                    <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                      {errors.priority}
+                    </span>
+                  )}
                 </Box>
               </Box>
               <Box
@@ -222,7 +358,10 @@ function AddNew() {
                 <Typography sx={{ fontSize: "14px", color: "#616161" }}>
                   Due date
                 </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <LocalizationProvider
+                  dateAdapter={AdapterDayjs}
+                  error={!!errors.date}
+                >
                   <DatePicker
                     value={dueDate}
                     onChange={(newValue) => setDueDate(newValue)}
@@ -250,6 +389,11 @@ function AddNew() {
                     }}
                   />
                 </LocalizationProvider>
+                {errors.date && (
+                  <span style={{ color: "#d32f2f", fontSize: "12px" }}>
+                    {errors.date}
+                  </span>
+                )}
               </Box>
             </Box>
             <Box>
@@ -258,9 +402,12 @@ function AddNew() {
               </Typography>
               <TextField
                 fullWidth
-                name="Tags"
+                name="tags"
                 placeholder="Tags"
                 variant="outlined"
+                InputProps={{ readOnly: viewOnly }}
+                error={!!errors.tags}
+                helperText={errors.tags}
                 sx={{
                   "& .MuiOutlinedInput-root": {
                     "&:hover fieldset": { border: "2px solid #80cbc4" },
@@ -278,44 +425,43 @@ function AddNew() {
                 }}
               />
             </Box>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={cancelClick}
-            sx={{
-              color: "red",
-              borderColor: "red",
-              border: "1px solid #d1c4e9",
-              textTransform: "none",
-              gap: 0.5,
-            }}
-          >
-            <CancelIcon sx={{ width: 20, height: 20 }} />
-            Cancel
-          </Button>
-          {/* {!viewOnly && ( */}
-          <Button
-            type="submit"
-            form="add-form"
-            sx={{
-              color: "white",
-              borderRadius: "5px",
-              textTransform: "none",
-              gap: 0.5,
-              backgroundColor: "#00695c",
-            }}
-          >
-            {/* {noteToEdit ? (
+            <DialogActions>
+              <Button
+                onClick={cancelClick}
+                sx={{
+                  color: "red",
+                  borderColor: "red",
+                  border: "1px solid #d1c4e9",
+                  textTransform: "none",
+                  gap: 0.5,
+                }}
+              >
+                <CancelIcon sx={{ width: 20, height: 20 }} />
+                Cancel
+              </Button>
+              {!viewOnly && (
+                <Button
+                  type="submit"
+                  form="add-form"
+                  sx={{
+                    color: "white",
+                    borderRadius: "5px",
+                    textTransform: "none",
+                    gap: 0.5,
+                    backgroundColor: "#00695c",
+                  }}
+                >
+                  {boardToEdit ? (
                     <SaveAsIcon sx={{ width: 20, height: 20 }} />
                   ) : (
                     <SaveIcon sx={{ width: 20, height: 20 }} />
                   )}
-                  {noteToEdit ? "Upadate" : "Save"} */}
-            Save
-          </Button>
-          {/* )} */}
-        </DialogActions>
+                  {boardToEdit ? "Upadate" : "Save"}
+                </Button>
+              )}
+            </DialogActions>
+          </form>
+        </DialogContent>
       </Dialog>
     </>
   );
