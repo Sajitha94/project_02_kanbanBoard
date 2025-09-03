@@ -112,7 +112,7 @@ function ToDoCard() {
               >
                 <CardContent
                   sx={{
-                    height: "240px",
+                    height: "280px",
                     overflowY: "auto",
                     pr: 1,
                     scrollbarWidth: "none",
@@ -138,7 +138,7 @@ function ToDoCard() {
                   </Box>
                   <Typography
                     sx={{
-                      color: "text.secondary",
+                      color: "#616161",
                       mb: 1.5,
                     }}
                   >
@@ -174,48 +174,38 @@ function ToDoCard() {
                 </CardContent>
 
                 <CardActions
-                  className="flex flex-col gap-4 "
                   sx={{
-                    padding: "8px  16px 10px 16px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "40px",
+                    margin: 0,
                     color: "#616161",
-                    alignItems: "start",
                   }}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: "40px",
-                      margin: 0,
+                      flexDirection: "column",
+                      alignItems: "start",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                      }}
-                    >
-                      <Typography sx={{ fontSize: "16px" }}>updated</Typography>
-                      <Typography sx={{ fontSize: "14px" }}>
-                        {card.date}{" "}
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        gap: "10px",
-                      }}
-                    >
-                      <EditIcon
-                        onClick={() => ButtonOnclick("edit", card.id)}
-                      />
-                      <DeleteIcon
-                        onClick={() => ButtonOnclick("delete", card.id)}
-                      />
-                    </Box>
+                    <Typography sx={{ fontSize: "16px" }}>updated</Typography>
+                    <Typography sx={{ fontSize: "14px" }}>
+                      {card.date}{" "}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      gap: "10px",
+                    }}
+                  >
+                    <EditIcon onClick={() => ButtonOnclick("edit", card.id)} />
+                    <DeleteIcon
+                      onClick={() => ButtonOnclick("delete", card.id)}
+                    />
                   </Box>
                 </CardActions>
               </Card>
@@ -225,7 +215,7 @@ function ToDoCard() {
       </Box>
 
       {/*  */}
-      <Box
+     <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -259,7 +249,7 @@ function ToDoCard() {
               >
                 <CardContent
                   sx={{
-                    height: "240px",
+                    height: "280px",
                     overflowY: "auto",
                     pr: 1,
                     scrollbarWidth: "none",
@@ -285,7 +275,7 @@ function ToDoCard() {
                   </Box>
                   <Typography
                     sx={{
-                      color: "text.secondary",
+                      color: "#616161",
                       mb: 1.5,
                     }}
                   >
@@ -321,48 +311,38 @@ function ToDoCard() {
                 </CardContent>
 
                 <CardActions
-                  className="flex flex-col gap-4 "
                   sx={{
-                    padding: "8px  16px 10px 16px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "40px",
+                    margin: 0,
                     color: "#616161",
-                    alignItems: "start",
                   }}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: "40px",
-                      margin: 0,
+                      flexDirection: "column",
+                      alignItems: "start",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                      }}
-                    >
-                      <Typography sx={{ fontSize: "16px" }}>updated</Typography>
-                      <Typography sx={{ fontSize: "14px" }}>
-                        {card.date}{" "}
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        gap: "10px",
-                      }}
-                    >
-                      <EditIcon
-                        onClick={() => ButtonOnclick("edit", card.id)}
-                      />
-                      <DeleteIcon
-                        onClick={() => ButtonOnclick("delete", card.id)}
-                      />
-                    </Box>
+                    <Typography sx={{ fontSize: "16px" }}>updated</Typography>
+                    <Typography sx={{ fontSize: "14px" }}>
+                      {card.date}{" "}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      gap: "10px",
+                    }}
+                  >
+                    <EditIcon onClick={() => ButtonOnclick("edit", card.id)} />
+                    <DeleteIcon
+                      onClick={() => ButtonOnclick("delete", card.id)}
+                    />
                   </Box>
                 </CardActions>
               </Card>
@@ -370,7 +350,7 @@ function ToDoCard() {
           }
         })}
       </Box>
-      <Box
+    <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -404,7 +384,7 @@ function ToDoCard() {
               >
                 <CardContent
                   sx={{
-                    height: "240px",
+                    height: "280px",
                     overflowY: "auto",
                     pr: 1,
                     scrollbarWidth: "none",
@@ -430,7 +410,7 @@ function ToDoCard() {
                   </Box>
                   <Typography
                     sx={{
-                      color: "text.secondary",
+                      color: "#616161",
                       mb: 1.5,
                     }}
                   >
@@ -466,48 +446,38 @@ function ToDoCard() {
                 </CardContent>
 
                 <CardActions
-                  className="flex flex-col gap-4 "
                   sx={{
-                    padding: "8px  16px 10px 16px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    gap: "40px",
+                    margin: 0,
                     color: "#616161",
-                    alignItems: "start",
                   }}
                 >
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      gap: "40px",
-                      margin: 0,
+                      flexDirection: "column",
+                      alignItems: "start",
                     }}
                   >
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                      }}
-                    >
-                      <Typography sx={{ fontSize: "16px" }}>updated</Typography>
-                      <Typography sx={{ fontSize: "14px" }}>
-                        {card.date}{" "}
-                      </Typography>
-                    </Box>
-                    <Box
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        gap: "10px",
-                      }}
-                    >
-                      <EditIcon
-                        onClick={() => ButtonOnclick("edit", card.id)}
-                      />
-                      <DeleteIcon
-                        onClick={() => ButtonOnclick("delete", card.id)}
-                      />
-                    </Box>
+                    <Typography sx={{ fontSize: "16px" }}>updated</Typography>
+                    <Typography sx={{ fontSize: "14px" }}>
+                      {card.date}{" "}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-around",
+                      gap: "10px",
+                    }}
+                  >
+                    <EditIcon onClick={() => ButtonOnclick("edit", card.id)} />
+                    <DeleteIcon
+                      onClick={() => ButtonOnclick("delete", card.id)}
+                    />
                   </Box>
                 </CardActions>
               </Card>
