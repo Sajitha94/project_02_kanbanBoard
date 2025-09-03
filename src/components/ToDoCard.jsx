@@ -10,6 +10,7 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useKanban } from "./LocalStorageDB";
+import LaunchIcon from "@mui/icons-material/Launch";
 function ToDoCard() {
   const {
     open,
@@ -35,7 +36,9 @@ function ToDoCard() {
       setBoards(deleteData);
     }
   };
-
+  const viewCard = (id) => {
+    handleClickOpen(id, true);
+  };
   return (
     <Box
       sx={{
@@ -90,17 +93,24 @@ function ToDoCard() {
                     scrollbarWidth: "none",
                   }}
                 >
-                  <Typography
-                    gutterBottom
-                    sx={{
-                      fontWeight: "bold",
-                      wordBreak: "break-word",
-                      overflowWrap: "anywhere",
-                    }}
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    {card.title}
-                  </Typography>
-
+                    <Typography
+                      gutterBottom
+                      sx={{
+                        fontWeight: "bold",
+                        wordBreak: "break-word",
+                        overflowWrap: "anywhere",
+                      }}
+                    >
+                      {card.title}
+                    </Typography>
+                    <LaunchIcon
+                      className="text-gray-600 "
+                      onClick={() => viewCard(card.id)}
+                    />
+                  </Box>
                   <Typography
                     sx={{
                       color: "text.secondary",

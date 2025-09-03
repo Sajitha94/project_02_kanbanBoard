@@ -285,6 +285,7 @@ function AddNew() {
                     <Select
                       value={selectStatus}
                       onChange={SelectStatusChange}
+                      disabled={viewOnly}
                       displayEmpty
                       inputProps={{ "aria-label": "Without label" }}
                       sx={{
@@ -332,6 +333,7 @@ function AddNew() {
                     <Select
                       value={selectPriority}
                       onChange={SelectPriorityChange}
+                      disabled={viewOnly}
                       displayEmpty
                       inputProps={{ "aria-label": "Without label" }}
                       sx={{
@@ -349,7 +351,7 @@ function AddNew() {
                       }}
                     >
                       <MenuItem value="">
-                        <em>All Statuses</em>
+                        <em>All Priority</em>
                       </MenuItem>
                       <MenuItem value={"low"}>Low</MenuItem>
                       <MenuItem value={"medium"}>Medium</MenuItem>
@@ -381,6 +383,7 @@ function AddNew() {
                   <DatePicker
                     value={dueDate}
                     onChange={(newValue) => setDueDate(newValue)}
+                    disabled={viewOnly}
                     slotProps={{
                       textField: {
                         fullWidth: true,
