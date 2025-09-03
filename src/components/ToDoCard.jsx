@@ -70,6 +70,7 @@ function ToDoCard() {
         display: "grid",
         gap: 3,
         marginTop: "30px",
+        padding: { sm: "10px", xs: "5px" },
         gridTemplateColumns: {
           xs: "1fr",
           sm: "1fr 1fr",
@@ -82,10 +83,13 @@ function ToDoCard() {
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
+          gap: "15px",
           backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
+          width: { sm: 350, xs: 315 },
+          minHeight: 450,
+          alignItems: "center",
         }}
       >
         <Typography
@@ -215,14 +219,17 @@ function ToDoCard() {
       </Box>
 
       {/*  */}
-     <Box
+      <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
+          gap: "15px",
           backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
+          width: { sm: 350, xs: 315 },
+          minHeight: 450,
+          alignItems: "center",
         }}
       >
         <Typography
@@ -350,14 +357,17 @@ function ToDoCard() {
           }
         })}
       </Box>
-    <Box
+      <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          gap: "5px",
+          gap: "15px",
           backgroundColor: "#f0f4f4",
           padding: "20px 30px",
           borderRadius: "10px",
+          width: { sm: 350, xs: 315 },
+          minHeight: 450,
+          alignItems: "center",
         }}
       >
         <Typography
