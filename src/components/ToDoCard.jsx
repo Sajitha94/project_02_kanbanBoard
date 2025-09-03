@@ -24,10 +24,14 @@ function ToDoCard() {
   } = useKanban();
 
   const ButtonOnclick = (btn, id) => {
+    console.log("p");
+
     if (btn === "edit") {
       handleClickOpen(id);
     } else if (btn === "delete") {
       const deleteData = boards.filter((item) => item.id !== id);
+      console.log(deleteData, "de");
+
       setBoards(deleteData);
     }
   };
@@ -105,6 +109,32 @@ function ToDoCard() {
                   >
                     {card.description}
                   </Typography>
+                  <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+                    <Chip
+                      label={card.priority}
+                      sx={{
+                        backgroundColor: "#e0f2f1",
+                        border: "1px solid #ccc",
+                        color: "#424242",
+                        fontWeight: "bold",
+                        fontSize: "13px",
+                        padding: "4px",
+                      }}
+                    />
+                    {card.tags.map((item) => (
+                      <Chip
+                        label={item}
+                        icon={<LocalOfferIcon sx={{ width: "13px" }} />}
+                        sx={{
+                          backgroundColor: "white",
+                          border: "1px solid #ccc",
+                          color: "#616161",
+                          fontWeight: "bold",
+                          fontSize: "11px",
+                        }}
+                      />
+                    ))}
+                  </Stack>
                 </CardContent>
 
                 <CardActions
@@ -115,13 +145,6 @@ function ToDoCard() {
                     alignItems: "start",
                   }}
                 >
-                  <Stack direction="row" spacing={1}>
-                    <Chip label={card.priority} />
-                    <Chip
-                      label={card.tags.join(", ")}
-                      icon={<LocalOfferIcon sx={{ width: "15px" }} />}
-                    />
-                  </Stack>
                   <Box
                     sx={{
                       display: "flex",
@@ -154,7 +177,7 @@ function ToDoCard() {
                         onClick={() => ButtonOnclick("edit", card.id)}
                       />
                       <DeleteIcon
-                        onClick={() => ButtonOnclick("delte", card.id)}
+                        onClick={() => ButtonOnclick("delete", card.id)}
                       />
                     </Box>
                   </Box>
