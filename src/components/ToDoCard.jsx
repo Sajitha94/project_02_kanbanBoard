@@ -52,6 +52,7 @@ function ToDoCard() {
     ) {
       return;
     }
+    console.log(boards, "jj");
 
     setBoards((prev) =>
       prev.map((card) =>
