@@ -57,14 +57,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 function SearchPage() {
   const [status, setStatus] = useState("");
   const [priorities, SetPriorities] = useState("");
-  const { open, handleClose, handleClickOpen, viewOnly,
-    setViewOnly, } = useKanban();
+  const {
+    open,
+    handleClose,
+    handleClickOpen,
+    viewOnly,
+    setViewOnly,
+    searchTerm,
+    setSearchTerm,
+  } = useKanban();
 
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
   };
   const handlePrioritiesChange = (event) => {
     SetPriorities(event.target.value);
+  };
+  const searchClick = (btn) => {
+    setSearchTerm("");
   };
   return (
     <Box
@@ -104,6 +114,9 @@ function SearchPage() {
           <StyledInputBase
             placeholder="Search…"
             inputProps={{ "aria-label": "search" }}
+            sx={{ color: "#616161" }}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
         </Search>
         <Stack spacing={2} direction="row">

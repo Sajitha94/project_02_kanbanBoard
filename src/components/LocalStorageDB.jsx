@@ -8,6 +8,7 @@ export function LocalStorageDB({ children }) {
   const [open, setOpen] = useState(false);
   const [viewOnly, setViewOnly] = useState(false);
   const [editBoardId, setEditBoardId] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const defaultBoard = [
     {
       id: 1,
@@ -55,7 +56,8 @@ export function LocalStorageDB({ children }) {
         setBoards,
         viewOnly,
         setViewOnly,
-
+        searchTerm,
+        setSearchTerm,
         editBoardId,
         setEditBoardId,
       }}

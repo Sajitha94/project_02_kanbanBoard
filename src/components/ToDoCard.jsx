@@ -22,6 +22,7 @@ function ToDoCard() {
     viewOnly,
     setViewOnly,
     setEditBoardId,
+    searchTerm,
   } = useKanban();
 
   const ButtonOnclick = (btn, id) => {
@@ -39,6 +40,17 @@ function ToDoCard() {
   const viewCard = (id) => {
     handleClickOpen(id, true);
   };
+
+  const filteredBoards = searchTerm.trim()
+    ? boards.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.tags.some((tag) =>
+            tag.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+      )
+    : boards;
   return (
     <Box
       sx={{
@@ -73,7 +85,7 @@ function ToDoCard() {
         >
           To Do
         </Typography>
-        {boards.map((card, idx) => {
+        {filteredBoards.map((card, idx) => {
           if (card.status === "todo") {
             return (
               <Card
@@ -131,8 +143,9 @@ function ToDoCard() {
                         padding: "4px",
                       }}
                     />
-                    {card.tags.map((item) => (
+                    {card.tags.map((item, idx) => (
                       <Chip
+                        key={idx}
                         label={item}
                         icon={<LocalOfferIcon sx={{ width: "13px" }} />}
                         sx={{
