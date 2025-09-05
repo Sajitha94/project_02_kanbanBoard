@@ -12,10 +12,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useKanban } from "./LocalStorageDB";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-
+import { useState } from "react";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Button,
+} from "@mui/material";
 function ToDoCard() {
   const { handleClickOpen, boards, setBoards, searchTerm, status, priorities } =
     useKanban();
+  const [open, setOpen] = useState(false);
+  const [selectedCardId, setSelectedCardId] = useState(null);
   const ButtonOnclick = (btn, id) => {
     if (btn === "edit") {
       handleClickOpen(id);
@@ -25,6 +35,23 @@ function ToDoCard() {
     }
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    setSelectedCardId(null);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedCardId) {
+      ButtonOnclick("delete", selectedCardId);
+    }
+    setOpen(false);
+    setSelectedCardId(null);
+  };
+
+  const handleDeleteClick = (id) => {
+    setSelectedCardId(id); // remember which card
+    setOpen(true); // open confirmation modal
+  };
   const viewCard = (id) => {
     handleClickOpen(id, true);
   };
@@ -52,7 +79,6 @@ function ToDoCard() {
     ) {
       return;
     }
-    console.log(boards, "jj");
 
     setBoards((prev) =>
       prev.map((card) =>
@@ -138,6 +164,7 @@ function ToDoCard() {
                         </Typography>
                         <LaunchIcon
                           className="text-gray-600 "
+                          sx={{ cursor: "pointer" }}
                           onClick={() => viewCard(card.id)}
                         />
                       </Box>
@@ -212,13 +239,15 @@ function ToDoCard() {
                           display: "flex",
                           justifyContent: "space-around",
                           gap: "10px",
+                          cursor: "pointer",
                         }}
                       >
                         <EditIcon
                           onClick={() => ButtonOnclick("edit", card.id)}
                         />
                         <DeleteIcon
-                          onClick={() => ButtonOnclick("delete", card.id)}
+                          onClick={() => handleDeleteClick(card.id)} // ✅ pass card.id
+                          style={{ cursor: "pointer" }}
                         />
                       </Box>
                     </CardActions>
@@ -234,22 +263,48 @@ function ToDoCard() {
   );
 
   return (
-    <DragDropContext onDragEnd={handleDragEnd}>
-      <Box
-        sx={{
-          display: "grid",
-          gap: 3,
-          marginTop: "30px",
-          padding: { sm: "10px", xs: "5px" },
-          gridTemplateColumns: { xs: "1fr", sm: "1fr 1fr", md: "1fr 1fr 1fr" },
-          justifyItems: "center",
-        }}
-      >
-        {renderColumn("todo", "To Do")}
-        {renderColumn("process", "In Process")}
-        {renderColumn("done", "Done")}
-      </Box>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <Box
+          sx={{
+            display: "grid",
+            gap: 3,
+            marginTop: "30px",
+            padding: { sm: "10px", xs: "5px" },
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "1fr 1fr 1fr",
+            },
+            justifyItems: "center",
+          }}
+        >
+          {renderColumn("todo", "To Do")}
+          {renderColumn("process", "In Process")}
+          {renderColumn("done", "Done")}
+        </Box>
+      </DragDropContext>
+
+      {/* 🔹 Global confirmation dialog */}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Confirm Delete</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to delete this card?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={handleConfirmDelete}
+            color="error"
+            variant="contained"
+          >
+            Yes, Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </>
   );
 }
 
